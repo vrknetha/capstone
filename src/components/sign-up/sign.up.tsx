@@ -19,7 +19,7 @@ const defaultFormFields: SignUpForm = {
   password: "",
   confirmPassword: "",
 };
-const SignUpComponent = () => {
+const SignUp = () => {
   const [formFields, setFormFields] = useState(defaultFormFields);
   const { displayName, emailAddress, password, confirmPassword } = formFields;
 
@@ -86,12 +86,10 @@ const SignUpComponent = () => {
           name="confirmPassword"
           value={confirmPassword}
         />
-        <Button buttonType="inverted" type="submit">
-          Sign Up
-        </Button>
+        <Button type="submit">Sign Up</Button>
       </form>
     </div>
   );
 };
 
-export default SignUpComponent;
+export default SignUp;
