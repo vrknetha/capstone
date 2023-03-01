@@ -5,10 +5,14 @@ import {
   signInWithRedirect,
   signInWithEmailAndPassword,
   signInWithPopup,
+  signOut,
   createUserWithEmailAndPassword,
   GoogleAuthProvider,
+  onAuthStateChanged,
+  NextOrObserver,
 } from "firebase/auth";
 import { getFirestore, doc, getDoc, setDoc } from "firebase/firestore";
+
 const firebaseConfig = {
   apiKey: "AIzaSyBbBnyeR_G9VgVsibTnE0GZx77MlnHbX14",
   authDomain: "capstone-baa08.firebaseapp.com",
@@ -27,7 +31,7 @@ googleAuthProvider.setCustomParameters({
   prompt: "select_account",
 });
 
-export const auth = getAuth();
+export const auth = getAuth(app);
 export const signInWithGooglePopup = () =>
   signInWithPopup(auth, googleAuthProvider);
 export const signInWithGoogleRedirect = () =>
@@ -75,3 +79,8 @@ export const signInAuthUserWithEmailAndPassword = async (
   if (!email || !password) return;
   return await signInWithEmailAndPassword(auth, email, password);
 };
+
+export const SignOutUser = async () => await signOut(auth);
+
+export const onAuthChangeListener = (callback: NextOrObserver<User>) =>
+  onAuthStateChanged(auth, callback);

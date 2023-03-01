@@ -29,11 +29,7 @@ const SignIn = () => {
   const handleSubmit = async (event: any) => {
     event.preventDefault();
     try {
-      const response = await signInAuthUserWithEmailAndPassword(
-        emailAddress,
-        password
-      );
-      console.log(response);
+      await signInAuthUserWithEmailAndPassword(emailAddress, password);
       resetFormFields();
     } catch (error: any) {
       if (
@@ -46,8 +42,13 @@ const SignIn = () => {
   };
 
   const logGoogleUser = async () => {
-    const { user } = await signInWithGooglePopup();
-    await createUserDocumentFromAuth(user);
+    try {
+      const { user } = await signInWithGooglePopup();
+      await createUserDocumentFromAuth(user);
+      resetFormFields();
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   return (
