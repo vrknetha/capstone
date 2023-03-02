@@ -1,16 +1,5 @@
 import { createContext, useState } from "react";
 import shop_data from "../shop-data.json";
-
-interface Product {
-  id: number;
-  name: string;
-  imageUrl: string;
-  price: number;
-}
-
-type ProductContextType = {
-  products: Product[] | [];
-};
 export const ProductsContext = createContext<ProductContextType>({
   products: [],
 });
